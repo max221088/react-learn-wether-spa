@@ -38,23 +38,43 @@ class App extends React.Component {
 			country: data.sys.country,
 			pressure: data.main.pressure,
 			sunset: this.getTime(data.sys.sunset),
-			error: ""
+			error: undefined
+		})
+		} else {
+			this.setState({
+				temp: undefined,
+				city: undefined,
+				country: undefined,
+				pressure: undefined,
+				sunset: undefined,
+				error: 'Enter city name'
 		})
 		}
 	}
 
 	render () {
 		return (
-			<div>
-				<Info/>
-				<Form weatherMethod={this.gettingWeather} />
-				< Weather 
-					temp={this.state.temp}
-					city={this.state.city}
-					country={this.state.country}
-					pressure={this.state.pressure}
-					sunset={this.state.sunset}
-				/>
+			<div className="wrapper">
+				<div className="main">
+					<div className="container">
+						<div className="row">
+							<div className="col-sm-5 info">
+								<Info/>
+							</div>
+							<div className="col-sm-7 form">
+							<Form weatherMethod={this.gettingWeather} />
+								< Weather 
+									temp={this.state.temp}
+									city={this.state.city}
+									country={this.state.country}
+									pressure={this.state.pressure}
+									sunset={this.state.sunset}
+									error={this.state.error}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		)
 	}
